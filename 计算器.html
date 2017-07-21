@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算器</title>
+	<style>
+	ul,li{margin: 0;padding: 0;list-style: none;}
+	#calculator {
+	    width: 200px;
+	}
+
+	#result {
+	    height: 50px;
+		padding-top:50px;
+	    background: gray;
+	    color: #fff;
+	    font: 50px/50px "微软雅黑";
+		text-align: right;
+	}
+
+	#ac li {
+	    float: left;
+	    width: 50px;
+	    height: 50px;
+	    font: 16px/50px "微软雅黑";
+	    text-align: center;
+	    background: lightgray:
+	}
+
+	#oper {
+	    float: right;
+	}
+
+	#oper li {
+	    width: 50px;
+	    height: 50px;
+	    background: orange;
+	    color: #fff;
+	    font: 14px/50px "微软雅黑";
+	    text-align: center;
+	}
+
+	#num {
+	    width: 150px;
+	}
+
+	#num li {
+	    float: right;
+	    width: 50px;
+	    height: 50px;
+		font: 16px/50px "微软雅黑";
+		text-align: center;
+	}
+	</style>
+</head>
+<body>
+<div id="calculator">
+    <div id="result"></div>
+    <ul id="ac">
+        <li>AC</li>
+        <li>+/-</li>
+        <li>%</li>
+    </ul>
+    <ul id="oper">
+        <li>÷</li>
+        <li>×</li>
+        <li>-</li>
+        <li>+</li>
+        <li>=</li>
+    </ul>
+    <ul id="num">
+        <li>9</li>
+        <li>8</li>
+        <li>7</li>
+        <li>6</li>
+        <li>5</li>
+        <li>4</li>
+        <li>3</li>
+        <li>2</li>
+        <li>1</li>
+        <li>.</li>
+		<li></li>
+        <li>0</li>
+    </ul>
+</div>
+<script>
+	/*需求：
+	运行环境为 Google Chrome。
+	必须支持标准的四则运算。例如：1+2*3=7。
+	方案：
+	给数字按钮加点击事件，获得对应的数字，显示在result上。
+	给运算符加点击事件，计算并显示结果在result上。
+	*/
+var oResult = document.getElementById('result');
+var aNum = document.getElementById('num').getElementsByTagName('li');
+var aOp = document.getElementById('oper').getElementsByTagName('li');
+var aAc = document.getElementById('ac').getElementsByTagName('li');
+var result = [];
+
+// 给数字加index
+for (var i=0;i<9;i++) {
+	aNum[i].index = 9-i;
+}
+aNum[9].index = '.';
+aNum[10].index = aNum[11].index = 0;
+
+for (var i=0; i<aNum.length; i++) {
+	aNum[i].onclick = function(){
+		// 点击，把对应的index加到原显示的数字的后面
+		if (oResult.innerHTML == '+' || oResult.innerHTML == '-' || oResult.innerHTML == '×' || oResult.innerHTML == '÷' || typeof result == 'Number' ) {
+			oResult.innerHTML = '';
+		}
+		oResult.innerHTML += this.index;
+	}
+}
+
+for (var i = 0; i < aOp.length-1; i++) {
+	aOp[i].onclick = function(){
+		// 把显示的内容转成数字，添加到result
+		var num = parseFloat(oResult.innerHTML);
+		result.push(num);
+		// 添加数字操作符到字符串
+		result.push(this.innerHTML);
+		console.log(result);
+		// 显示数字操作符
+		oResult.innerHTML = this.innerHTML;
+	}
+}
+
+aOp[4].onclick = function(){
+	// 把显示的内容转成数字，添加到result
+	var num = parseFloat(oResult.innerHTML);
+	result.push(num);
+	// 清空显示
+	oResult.innerHTML = '';
+	// 数组转成可直接计算的字符串
+	for (var i = 0,arr1=''; i < result.length; i++) {
+		if (result[i] == '×' ) {
+			result[i] = '*' ;
+		} else if ( result[i] == '÷'  ) {
+			result[i] = '/';
+		}
+		arr1+=result[i];
+	}
+	// console.log(typeof eval(arr1));
+	// 从字符串计算结果
+	oResult.innerHTML = eval(arr1);
+	result = [];
+}
+
+aAc[0].onclick = function(){
+	oResult.innerHTML = '';
+	result = [];
+}
+</script>
+</body>
+</html>
