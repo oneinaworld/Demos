@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tab切换效果汇总</title>
+	<style>
+	/*tab切换类型：*/
+	/*滑过切换*/
+		*{margin: 0;padding: 0;list-style: none;font-size: 12px;}
+		#notice1{width: 298px;height: 98px;margin: 10px;border: 1px solid #eee;overflow: hidden;}
+		#notice1-tit{height: 27px;position: relative;background: #f7f7f7;}
+		#notice1-tit ul{position: absolute;width: 301px;left: -1px;}
+		#notice1-tit li{float: left;width: 58px;height: 26px;line-height: 26px;text-align: center;overflow: hidden;background: #fff;border-bottom: 1px solid #eee;padding: 0 1px;background: #f7f7f7;}
+		#notice1-tit li.select{background: #fff;border-bottom-color:#fff;border-left: 1px solid #eee;border-right: 1px solid #eee; padding: 0;}
+		#notice1 a{text-decoration:none;}
+		#notice1 a:hover{color: #f90;}
+		#notice1-con .notice1-mod{margin: 10px 10px 10px 19px;display: none;}
+		#notice1-con .notice1-mod li{float: left;width: 134px;height: 25px;overflow: hidden;}
+		#notice1-con div:first-child{display: block;}
+	/*点击切换*/
+		*{margin: 0;padding: 0;list-style: none;font-size: 12px;}
+		#notice2{width: 298px;height: 98px;margin: 70px 10px 10px 10px;border: 1px solid #eee;overflow: hidden;}
+		#notice2-tit{height: 27px;position: relative;background: #f7f7f7;}
+		#notice2-tit ul{position: absolute;width: 301px;left: -1px;}
+		#notice2-tit li{float: left;width: 58px;height: 26px;line-height: 26px;text-align: center;overflow: hidden;background: #fff;border-bottom: 1px solid #eee;padding: 0 1px;background: #f7f7f7;}
+		#notice2-tit li.select{background: #fff;border-bottom-color:#fff;border-left: 1px solid #eee;border-right: 1px solid #eee; padding: 0;}
+		#notice2 a{text-decoration:none;}
+		#notice2 a:hover{color: #f90;}
+		#notice2-con .notice2-mod{margin: 10px 10px 10px 19px;display: none;}
+		#notice2-con .notice2-mod li{float: left;width: 134px;height: 25px;overflow: hidden;}
+		#notice2-con div:first-child{display: block;}
+	/*延迟切换*/
+		*{margin: 0;padding: 0;list-style: none;font-size: 12px;}
+		#notice3{width: 298px;height: 98px;margin: 70px 10px 10px 10px;border: 1px solid #eee;overflow: hidden;}
+		#notice3-tit{height: 27px;position: relative;background: #f7f7f7;}
+		#notice3-tit ul{position: absolute;width: 301px;left: -1px;}
+		#notice3-tit li{float: left;width: 58px;height: 26px;line-height: 26px;text-align: center;overflow: hidden;background: #fff;border-bottom: 1px solid #eee;padding: 0 1px;background: #f7f7f7;}
+		#notice3-tit li.select{background: #fff;border-bottom-color:#fff;border-left: 1px solid #eee;border-right: 1px solid #eee; padding: 0;}
+		#notice3 a{text-decoration:none;}
+		#notice3 a:hover{color: #f90;}
+		#notice3-con .notice3-mod{margin: 10px 10px 10px 19px;display: none;}
+		#notice3-con .notice3-mod li{float: left;width: 134px;height: 25px;overflow: hidden;}
+		#notice3-con div:first-child{display: block;}
+	/*自动切换*/
+		*{margin: 0;padding: 0;list-style: none;font-size: 12px;}
+		#notice4{width: 298px;height: 98px;margin: 70px 10px 10px 10px;border: 1px solid #eee;overflow: hidden;}
+		#notice4-tit{height: 27px;position: relative;background: #f7f7f7;}
+		#notice4-tit ul{position: absolute;width: 301px;left: -1px;}
+		#notice4-tit li{float: left;width: 58px;height: 26px;line-height: 26px;text-align: center;overflow: hidden;background: #fff;border-bottom: 1px solid #eee;padding: 0 1px;background: #f7f7f7;}
+		#notice4-tit li.select{background: #fff;border-bottom-color:#fff;border-left: 1px solid #eee;border-right: 1px solid #eee; padding: 0;}
+		#notice4 a{text-decoration:none;}
+		#notice4 a:hover{color: #f90;}
+		#notice4-con .notice4-mod{margin: 10px 10px 10px 19px;display: none;}
+		#notice4-con .notice4-mod li{float: left;width: 134px;height: 25px;overflow: hidden;}
+		#notice4-con div:first-child{display: block;}
+	</style>
+	<script>
+	window.onload=function(){
+		function $(id){
+			return typeof id==='string'?document.getElementById(id):id;
+		}
+	// 滑过切换
+		// 获取鼠标滑过的标签和要切换内容的元素
+		var titles1=$('notice1-tit').getElementsByTagName('li'),
+				divs1=$('notice1-con').getElementsByTagName('div');
+		if (titles1.length != divs1.length) {
+			return}
+		//遍历titles下的li
+		for (var i = 0; i < titles1.length; i++) {
+			titles1[i].index = i;
+			titles1[i].onmouseover = function(){
+				//清除所有li上的class
+				for (var i = 0; i < titles1.length; i++) {
+					titles1[i].className = '';
+					divs1[i].style.display = 'none';
+				}
+				//设置当前为高亮显示
+				this.className = 'select';
+				//设置
+				divs1[this.index].style.display = 'block';
+			}
+		}
+
+	//点击切换
+		// 获取鼠标滑过的标签和要切换内容的元素
+		var titles2=$('notice2-tit').getElementsByTagName('li'),
+				divs2=$('notice2-con').getElementsByTagName('div');
+		if (titles2.length != divs2.length) {
+			return}
+		//遍历titles下的li
+		for (var i = 0; i < titles2.length; i++) {
+			titles2[i].index = i;
+			titles2[i].onclick = function(){
+				//清除所有li上的class
+				for (var i = 0; i < titles2.length; i++) {
+					titles2[i].className = '';
+					divs2[i].style.display = 'none';
+				}
+				//设置当前为高亮显示
+				this.className = 'select';
+				//设置
+				divs2[this.index].style.display = 'block';
+			}
+		}
+
+	//延迟切换
+		var index3 = 0,
+				timer = null,
+				lis3 = $('notice3-tit').getElementsByTagName('li'),
+				divs3 = $('notice3-con').getElementsByTagName('div');
+
+		if (lis3.length!=divs3.length) {return};
+
+		//遍历所有的页签
+		for (var i = 0; i < lis3.length; i++) {
+			lis3[i].index = i;
+			lis3[i].onmouseover =function(){
+				var that = this;//用that引用当前的li。因为在定时器中无法直接引用this
+				//如果存在定时器，先清除，只有在当前停留时间大于500ms，才执行
+				if (timer) {
+					clearTimeout(timer);
+					timer = null;
+				}
+				//延迟500ms执行
+				timer = setTimeout(function(){
+					for (var j = 0; j < lis3.length; j++) {
+						lis3[j].className = '';
+						divs3[j].style.display = 'none';
+					}
+					lis3[that.index].className = 'select';
+					divs3[that.index].style.display = 'block';
+				}, 500)
+			}
+		}
+
+	//自动切换
+		var index = 0,//index表示当前高亮的页签的索引
+				timer = null,
+				lis4 = $('notice4-tit').getElementsByTagName('li'),
+				divs4 = $('notice4-con').getElementsByTagName('div');
+		
+		tab();
+
+		//遍历页签且绑定
+		for (var i = 0; i < lis4.length; i++) {
+			lis4[i].index = i;
+			lis4[i].onmouseover = function(){
+				clearInterval(timer);
+				change(this.index);
+			}
+			lis4[i].onmouseout = function(){
+				tab();
+			}
+			divs4[i].onmouseover = function(){
+				clearInterval(timer);
+			}
+			divs4[i].onmouseout = function(){
+				tab();
+			}
+		}
+
+		function tab(){
+			//添加定时器改变当前高亮的索引
+			if (timer) {  //这里需要吗？说是当切换li过快时需要
+				clearInterval(timer);
+				timer = null;
+			}
+			timer = setInterval(function(){
+				index++;
+				if (index>=lis4.length) {
+					index = 0;
+				}
+				change(index);
+			},2000)
+		}
+
+		function change(n){
+				for (var j = 0; j < lis4.length; j++) {
+					lis4[j].className = '';
+					divs4[j].style.display = 'none';
+				}
+				lis4[n].className = 'select';
+				divs4[n].style.display = 'block';
+				index = n; //改变index为n，即当前鼠标指的li的索引
+		}
+
+	}
+	</script>
+</head>
+<body>
+	<!-- 滑过切换 -->
+	<div id="notice1">
+		<div id="notice1-tit">
+			<ul>
+				<li class="select"><a href="#">公告</a></li>
+				<li><a href="#">规则</a></li>
+				<li><a href="#">论坛</a></li>
+				<li><a href="#">安全</a></li>
+				<li><a href="#">公益</a></li>
+			</ul>
+		</div>
+		<div id="notice1-con">
+			<div class="notice1-mod">
+				<ul>
+					<li><a href="#">要玩快乐足球</a></li>
+					<li><a href="#">阿里2000万驰援灾区</a></li>
+					<li><a href="#">旅游宝让你边玩边赚</a></li>
+					<li><a href="#">多行跟进阿里信用借款</a></li>
+				</ul>
+			</div>
+			<div class="notice1-mod">
+				<ul>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">“滥发”即将换新</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">比特币严管啦！</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">商品属性局限</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">禁发商品名录</a></li>
+				</ul>
+			</div>
+			<div class="notice1-mod">
+				<ul>
+					<li><span>[<a href="#">聚集</a>]</span><a href="#">金牌卖家再启航</a></li>
+					<li><span>[<a href="#">功能</a>]</span><a href="#">橱窗规则升级啦</a></li>
+					<li><span>[<a href="#">话题</a>]</span><a href="#">又爱又恨优惠券</a></li>
+					<li><span>[<a href="#">工具</a>]</span><a href="#">购后送店铺红包</a></li>
+				</ul>
+			</div>
+			<div class="notice1-mod">
+				<ul>
+					<li><a href="#">个人重要信息要管牢！</a></li>
+					<li><a href="#">卖家防范红包欺诈提醒</a></li>
+					<li><a href="#">更换收货地址的陷阱</a></li>
+					<li><a href="#">注意骗子的技术升级了！</a></li>
+				</ul>
+			</div>
+			<div class="notice1-mod">
+				<ul>
+					<li><a href="#">走近无声课堂</a></li>
+					<li><a href="#">淘宝之行大人评审赢公益</a></li>
+					<li><a href="#">爱心品牌联合征集</a></li>
+					<li><a href="#">名公益机构淘宝开店攻略</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- 点击切换 -->
+	<div id="notice2">
+		<div id="notice2-tit">
+			<ul>
+				<li class="select"><a href="#">公告</a></li>
+				<li><a href="#">规则</a></li>
+				<li><a href="#">论坛</a></li>
+				<li><a href="#">安全</a></li>
+				<li><a href="#">公益</a></li>
+			</ul>
+		</div>
+		<div id="notice2-con">
+			<div class="notice2-mod">
+				<ul>
+					<li><a href="#">要玩快乐足球</a></li>
+					<li><a href="#">阿里2000万驰援灾区</a></li>
+					<li><a href="#">旅游宝让你边玩边赚</a></li>
+					<li><a href="#">多行跟进阿里信用借款</a></li>
+				</ul>
+			</div>
+			<div class="notice2-mod">
+				<ul>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">“滥发”即将换新</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">比特币严管啦！</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">商品属性局限</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">禁发商品名录</a></li>
+				</ul>
+			</div>
+			<div class="notice2-mod">
+				<ul>
+					<li><span>[<a href="#">聚集</a>]</span><a href="#">金牌卖家再启航</a></li>
+					<li><span>[<a href="#">功能</a>]</span><a href="#">橱窗规则升级啦</a></li>
+					<li><span>[<a href="#">话题</a>]</span><a href="#">又爱又恨优惠券</a></li>
+					<li><span>[<a href="#">工具</a>]</span><a href="#">购后送店铺红包</a></li>
+				</ul>
+			</div>
+			<div class="notice2-mod">
+				<ul>
+					<li><a href="#">个人重要信息要管牢！</a></li>
+					<li><a href="#">卖家防范红包欺诈提醒</a></li>
+					<li><a href="#">更换收货地址的陷阱</a></li>
+					<li><a href="#">注意骗子的技术升级了！</a></li>
+				</ul>
+			</div>
+			<div class="notice2-mod">
+				<ul>
+					<li><a href="#">走近无声课堂</a></li>
+					<li><a href="#">淘宝之行大人评审赢公益</a></li>
+					<li><a href="#">爱心品牌联合征集</a></li>
+					<li><a href="#">名公益机构淘宝开店攻略</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- 滑过延迟切换 -->	
+	<div id="notice3">
+		<div id="notice3-tit">
+			<ul>
+				<li class="select"><a href="#">公告</a></li>
+				<li><a href="#">规则</a></li>
+				<li><a href="#">论坛</a></li>
+				<li><a href="#">安全</a></li>
+				<li><a href="#">公益</a></li>
+			</ul>
+		</div>
+		<div id="notice3-con">
+			<div class="notice3-mod">
+				<ul>
+					<li><a href="#">要玩快乐足球</a></li>
+					<li><a href="#">阿里2000万驰援灾区</a></li>
+					<li><a href="#">旅游宝让你边玩边赚</a></li>
+					<li><a href="#">多行跟进阿里信用借款</a></li>
+				</ul>
+			</div>
+			<div class="notice3-mod">
+				<ul>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">“滥发”即将换新</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">比特币严管啦！</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">商品属性局限</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">禁发商品名录</a></li>
+				</ul>
+			</div>
+			<div class="notice3-mod">
+				<ul>
+					<li><span>[<a href="#">聚集</a>]</span><a href="#">金牌卖家再启航</a></li>
+					<li><span>[<a href="#">功能</a>]</span><a href="#">橱窗规则升级啦</a></li>
+					<li><span>[<a href="#">话题</a>]</span><a href="#">又爱又恨优惠券</a></li>
+					<li><span>[<a href="#">工具</a>]</span><a href="#">购后送店铺红包</a></li>
+				</ul>
+			</div>
+			<div class="notice3-mod">
+				<ul>
+					<li><a href="#">个人重要信息要管牢！</a></li>
+					<li><a href="#">卖家防范红包欺诈提醒</a></li>
+					<li><a href="#">更换收货地址的陷阱</a></li>
+					<li><a href="#">注意骗子的技术升级了！</a></li>
+				</ul>
+			</div>
+			<div class="notice3-mod">
+				<ul>
+					<li><a href="#">走近无声课堂</a></li>
+					<li><a href="#">淘宝之行大人评审赢公益</a></li>
+					<li><a href="#">爱心品牌联合征集</a></li>
+					<li><a href="#">名公益机构淘宝开店攻略</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- 自动切换（滑过时也切换） -->
+	<div id="notice4">
+		<div id="notice4-tit">
+			<ul>
+				<li class="select"><a href="#">公告</a></li>
+				<li><a href="#">规则</a></li>
+				<li><a href="#">论坛</a></li>
+				<li><a href="#">安全</a></li>
+				<li><a href="#">公益</a></li>
+			</ul>
+		</div>
+		<div id="notice4-con">
+			<div class="notice4-mod">
+				<ul>
+					<li><a href="#">要玩快乐足球</a></li>
+					<li><a href="#">阿里2000万驰援灾区</a></li>
+					<li><a href="#">旅游宝让你边玩边赚</a></li>
+					<li><a href="#">多行跟进阿里信用借款</a></li>
+				</ul>
+			</div>
+			<div class="notice4-mod">
+				<ul>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">“滥发”即将换新</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">比特币严管啦！</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">商品属性局限</a></li>
+					<li><span>[<a href="#">通知</a>]</span><a href="#">禁发商品名录</a></li>
+				</ul>
+			</div>
+			<div class="notice4-mod">
+				<ul>
+					<li><span>[<a href="#">聚集</a>]</span><a href="#">金牌卖家再启航</a></li>
+					<li><span>[<a href="#">功能</a>]</span><a href="#">橱窗规则升级啦</a></li>
+					<li><span>[<a href="#">话题</a>]</span><a href="#">又爱又恨优惠券</a></li>
+					<li><span>[<a href="#">工具</a>]</span><a href="#">购后送店铺红包</a></li>
+				</ul>
+			</div>
+			<div class="notice4-mod">
+				<ul>
+					<li><a href="#">个人重要信息要管牢！</a></li>
+					<li><a href="#">卖家防范红包欺诈提醒</a></li>
+					<li><a href="#">更换收货地址的陷阱</a></li>
+					<li><a href="#">注意骗子的技术升级了！</a></li>
+				</ul>
+			</div>
+			<div class="notice4-mod">
+				<ul>
+					<li><a href="#">走近无声课堂</a></li>
+					<li><a href="#">淘宝之行大人评审赢公益</a></li>
+					<li><a href="#">爱心品牌联合征集</a></li>
+					<li><a href="#">名公益机构淘宝开店攻略</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
