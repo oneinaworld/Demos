@@ -60,6 +60,7 @@ window.onload = function(){
     var oSlideUpUl = oSlideUp.getElementsByTagName('ul')[0];
     var oLeft = document.getElementsByClassName('slide_up_left')[0];
     var oRight = document.getElementsByClassName('slide_up_right')[0];
+    var aSlideUpBtn = document.getElementsByClassName('button')[0].getElementsByTagName('span');
     
     oSlideUp.num = 1;
     // 控制左右箭头显示
@@ -72,7 +73,6 @@ window.onload = function(){
         oRight.style.display = "none";
     }
     // 左右箭头点击
-    var onOff = true;
     oLeft.onclick = function(){
         if (onOff) {
              move(520);
@@ -83,12 +83,33 @@ window.onload = function(){
             move(-520);
         }
     }
+    // 自动播放
+    var oSlideup.timer = null;
+    oSlideup.timer = setInterval(function(){
+        move(520);
+    },500);
     
+    // 指示器状态及动作
+    for(var i = 0;i<aSlideUpBtn.length;i++){
+        aSlideUpBtn[i].index = i;
+        aSlideUpBtn[i].onmouseover = function(){
+            oSlideUpUl.style.left = -520*(i+1) + 'px';
+        }
+        switch(oSlideUpUl.offsetLeft)
+        {
+            case 520 || 3120:
+                for(var i = 0;i<aSlideUpBtn.length;i++){
+                    aSlideUpBtn[i].style.background = ;
+                }
+                aSlideUpBtn[0].style.background = ;
+            case 1040:
+                
+        }
+    }
+    
+    
+    var onOff = true;
     function move(x){
-        // var time = 300; //位移总时间
-        // var interval = 10;//位移间隔时间
-        // var speed = 520/(300/10); //每次位移量
-        // oSlideUpUl.style.left = oSlideUpUl.offsetLeft + x + 'px';
         onOff = false;
         doMove(oSlideUpUl, 'left', 90, (oSlideUpUl.offsetLeft + x), function () {
             if (oSlideUpUl.offsetLeft >= 0) {
@@ -99,25 +120,7 @@ window.onload = function(){
             }
             onOff = true;
         });
-        // if (oSlideUpUl.offsetLeft > 0) {
-        //     oSlideUpUl.style.left = -2080 + 'px';
-        // }
-        // if (oSlideUpUl.offsetLeft <= - 3120) {
-        //     oSlideUpUl.style.left = -520 + 'px';
-        // }
-        // function go(){
-            
-        // }
     }
-    // oSlideUp.timer = setInterval(function(){
-    //     // oSlideUpUl.style.left = oSlideUpUl.offsetLeft - 520 + 'px';
-    //     doMove(oSlideUpUl, 'left', 50, -520*oSlideUp.num);
-    //     oSlideUp.num++;
-    //     if(oSlideUp.num == 5){
-    //         oSlideUpUl.style.left = 0;
-    //     }
-    // }, 1000)
-
 }
 
 // 功能函数
