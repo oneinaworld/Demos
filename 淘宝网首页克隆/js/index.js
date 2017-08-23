@@ -55,73 +55,121 @@ window.onload = function(){
     }
 
     // slideUp轮播图
-    // 
     var oSlideUp = document.getElementsByClassName('slide_up')[0];
     var oSlideUpUl = oSlideUp.getElementsByTagName('ul')[0];
     var oLeft = document.getElementsByClassName('slide_up_left')[0];
     var oRight = document.getElementsByClassName('slide_up_right')[0];
     var aSlideUpBtn = document.getElementsByClassName('button')[0].getElementsByTagName('span');
-    
-    oSlideUp.num = 1;
-    // 控制左右箭头显示
-    oSlideUp.onmouseover = function(){
-        oLeft.style.display = "block";
-        oRight.style.display = "block";
-    }
-    oSlideUp.onmouseout = function(){
-        oLeft.style.display = "none";
-        oRight.style.display = "none";
-    }
+    oSlideUp.onOff = true;
+    oSlideUp.num = 1; //记录当前为第几张图
+
     // 左右箭头点击
     oLeft.onclick = function(){
-        if (onOff) {
-             move(520);
+        if (oSlideUp.onOff) {
+            // changeBtnStyle();
+            move(520);
         }
     }
     oRight.onclick = function(){
-        if (onOff) {
+        if (oSlideUp.onOff) {
+            // changeBtnStyle();
             move(-520);
         }
     }
-    // 自动播放
-    var oSlideup.timer = null;
-    oSlideup.timer = setInterval(function(){
-        move(520);
-    },500);
     
-    // 指示器状态及动作
+    // 自动播放
+    function play(){
+        oSlideUp.timer = setInterval(function(){
+            move(-520);
+            // console.log(oSlideUpUl.offsetLeft);
+            // changeBtnStyle();
+        },2000);
+    }
+    // 停止自动播放
+    function stop(){
+         clearInterval(oSlideUp.timer);
+    }
+
+    play();
+    oSlideUp.onmouseover = function(){
+        stop();
+        oLeft.style.display = "block"; // 控制左右箭头显示
+        oRight.style.display = "block";
+    };
+    oSlideUp.onmouseout = function(){
+        play();
+        oLeft.style.display = "none"; // 控制左右箭头显示
+        oRight.style.display = "none";
+    };
+    
+    // 指示器动作
     for(var i = 0;i<aSlideUpBtn.length;i++){
         aSlideUpBtn[i].index = i;
-        aSlideUpBtn[i].onmouseover = function(){
-            oSlideUpUl.style.left = -520*(i+1) + 'px';
-        }
-        switch(oSlideUpUl.offsetLeft)
-        {
-            case 520 || 3120:
-                for(var i = 0;i<aSlideUpBtn.length;i++){
-                    aSlideUpBtn[i].style.background = ;
-                }
-                aSlideUpBtn[0].style.background = ;
-            case 1040:
-                
+        aSlideUpBtn[i].onclick = function(){
+            oSlideUpUl.style.left = -520*(this.index+1) + 'px';
+            oSlideUp.num = this.index+1;
+            changeBtnStyle();
         }
     }
     
-    
-    var onOff = true;
     function move(x){
-        onOff = false;
+        oSlideUp.onOff = false;
         doMove(oSlideUpUl, 'left', 90, (oSlideUpUl.offsetLeft + x), function () {
+            if ( x < 0 ) {
+                oSlideUp.num++;
+                if ( oSlideUp.num > 5 ) {
+                    oSlideUp.num = 1;
+                }
+            } else {
+                oSlideUp.num--;
+                if (oSlideUp.num < 1) {
+                    oSlideUp.num = 5;
+                }
+            }
             if (oSlideUpUl.offsetLeft >= 0) {
                 oSlideUpUl.style.left = -2600 + 'px';
             }
-            if (oSlideUpUl.offsetLeft <= - 3120) {
+            if (oSlideUpUl.offsetLeft <= -3120) {
                 oSlideUpUl.style.left = -520 + 'px';
             }
-            onOff = true;
+            oSlideUp.onOff = true;
+            changeBtnStyle();
         });
     }
+
+    // 改变buttons的style
+    function changeBtnStyle(){
+        switch (oSlideUp.num) {
+            case 1:
+                resetStyle();
+                aSlideUpBtn[0].className = "active";
+                break;
+            case 2:
+                resetStyle();
+                aSlideUpBtn[1].className = "active";
+                break;
+            case 3:
+                resetStyle();
+                aSlideUpBtn[2].className = "active";
+                break;
+            case 4:
+                resetStyle();
+                aSlideUpBtn[3].className = "active";
+                break;
+            case 5:
+                resetStyle();
+                aSlideUpBtn[4].className = "active";
+                break;
+        }
+        function resetStyle(){
+            for (var i = 0; i < aSlideUpBtn.length; i++) {
+                aSlideUpBtn[i].className = "";
+            }
+        }
+    }
 }
+
+
 
 // 功能函数
 function doMove(obj, attr, dir, target, endFn){
