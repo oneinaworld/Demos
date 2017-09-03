@@ -1,4 +1,4 @@
-body,h1,h2,h3,h4,ul,li,a,img,div,input,button {
+body,h1,h2,h3,h4,ul,li,a,img,div,input,button,p {
     margin: 0;
     padding: 0;
     font-size: 12px;
@@ -15,7 +15,12 @@ ul,li {
 }
 a{
     text-decoration: none;
-    color: 
+    color: #ff4303;
+    display: inline;
+}
+strong,i,em{
+    font-style: normal;
+    font-weight: normal;
 }
 .clearfix{
     overflow: auto;
