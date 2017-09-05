@@ -1,0 +1,28 @@
+body,h1,h2,h3,h4,ul,li,a,img,div,input,button,p {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: 宋体;
+    border: none;
+    display: block;
+}
+img {
+    border: none;
+    display: inline-block;
+}
+ul,li {
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: #ff4303;
+    display: inline;
+}
+strong,i,em{
+    font-style: normal;
+    font-weight: normal;
+}
+.clearfix{
+    overflow: auto;
+    zoom: 1;
+}

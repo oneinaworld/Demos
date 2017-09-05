@@ -1,0 +1,17 @@
+/* sidebarUp */
+.login{height: 168px;}
+.login .wrap{width:57px;height: 57px;border-radius: 50%;overflow: hidden;margin: 15px auto 0;}
+.login .wrap img{position: relative;left: -1px;}
+.login>p{text-align: center;margin-top: 10px;}
+.login>p>a{color:#ff4303;}
+.login button{width: 75px;height: 25px;background: #ff6905;color: #fff;display: inline-block;}
+.login form{margin:6px auto;width: 239px;}
+
+.sidebar_up>a{display: block;width: 100%;background: #ffe4dd;color: #ff4400;text-align: center;margin: 0 auto;height: 32px;line-height: 32px;}
+
+.tab{height: 109px;width: 100%;}
+.tab>ul{height: 35px;}
+.tab li{width: 26px;margin: 15px;display: inline-block;text-align: center;padding-bottom: 3px;}
+.tab li:hover{border-bottom: 2px solid #ff4303;}
+.box{margin-left: 10px;}
+.box a{display: inline-block;width: 130px;margin: 6px 0;}
