@@ -1,6 +1,7 @@
 // 数据
 // menu
-var arr = [
+// 这是aLi[0]的数据
+var arr1 = [
     {
         title : "女装",
         items : ["秋新品" ,"连衣裙", "针织衫", "毛衣", "短外套" ,"风衣", "裤子", "卫衣/ 绒衫", "T恤", "阔腿裤" ,"衬衫", "牛仔裤", "毛呢外套" ,"半身裙" ,"大码女装", "时尚套装" ,"西装", "蕾丝/ 雪纺", "打底衫" ,"夹克", "皮衣", "妈妈装" ,"民族舞台", "腔调", "红人私服", "甜美风", "文艺风" ,"街头风", "原创单品", "通勤风"," 婚纱礼服"]
@@ -18,23 +19,24 @@ bind(window, "load", function(){
 
     var oPop = document.getElementsByClassName('popup')[0];
     var oPopL = document.getElementsByClassName('popup_left')[0];
-    var aSpan = document.getElementsByClassName('menu')[0].getElementsByTagName('ul')[0].getElementsByTagName('li')[0].getElementsByTagName('span');
     var aLi = document.getElementsByClassName('menu')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
+    var aLiSpan = aLi[0].getElementsByTagName('span');
+    
 
     // 用数据填充menu
     function fillMenu(){
-        for(var i=0;i<arr.length;i++){
+        for(var i=0;i<arr1.length;i++){
             var li = document.createElement('li');
             var h3 = document.createElement('h3');
-            h3.innerHTML = arr[i].title + "<span>更多 ></span>";
+            h3.innerHTML = arr1[i].title + "<span>更多 ></span>";
             li.appendChild(h3);
-            for(var j=0;j<arr[i].items.length;j++){
+            for(var j=0;j<arr1[i].items.length;j++){
                 var a = document.createElement('a');
-                a.innerHTML = arr[i].items[j];
+                a.innerHTML = arr1[i].items[j];
                 li.appendChild(a);
             }
             oPopL.appendChild(li);
-            aSpan[i].innerHTML = arr[i].title;
+            aLiSpan[i].innerHTML = arr1[i].title;
         }
     }
     fillMenu();
