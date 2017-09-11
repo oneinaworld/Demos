@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>居中总结</title>
+    <style>
+    .outer{width: 400px;height: 200px;background: #ccc;margin-bottom: 5px;position: relative;}
+    .inner{width: 150px;height: 100px;background: red;}
+
+    #div1 div{margin: 0 auto;}
+    #div2 div{margin-left: 50%;position: relative;left: -75px;}
+    #div3 div{position: absolute;left: 125px;}
+    #div4 div{position: relative;left: 125px;}
+    #div5{display: flex;justify-content: center;}
+    #div6 div{position: absolute;top: 50%;margin-top: -50px;}
+    #div7 div{position: absolute;top: 50%;transform: translateY(-50px);}
+    #div8 div{position: absolute;top: 50%;transform: translateY(-50%);}
+    #div9{display: flex;flex-direction: column;justify-content: center;}
+    #div10{display: flex;align-items: center;}
+    #div11{display: table;}
+    #div11 div{display: table-cell;vertical-align: middle;}
+    </style>
+</head>
+<body>
+    水平居中1 margin
+    <div id="div1" class="outer"><div class="inner"></div></div>
+    水平居中2 margin+position
+    <div id="div2" class="outer"><div class="inner"></div></div>
+    水平居中3 position(absolute)
+    <div id="div3" class="outer"><div class="inner"></div></div>
+    水平居中4 position(relative)
+    <div id="div4" class="outer"><div class="inner"></div></div>
+    水平居中5 flex
+    <div id="div5" class="outer"><div class="inner"></div></div>
+    垂直居中1 position+margin
+    <div id="div6" class="outer"><div class="inner"></div></div>
+    垂直居中2 position+transform(px)
+    <div id="div7" class="outer"><div class="inner"></div></div>
+    垂直居中3 position+transform(%)
+    <div id="div8" class="outer"><div class="inner"></div></div>
+    垂直居中4 flex
+    <div id="div9" class="outer"><div class="inner"></div></div>
+    垂直居中5 flex
+    <div id="div10" class="outer"><div class="inner"></div></div>
+    垂直居中6 table-cell 专为文字居中
+    <div id="div11" class="outer"><div class="inner">inner</div></div>
+    垂直居中7 table 专为文字居中
+    <table id="div12" class="outer"><tr><td class="inner">inner</td></tr></table>
+</body>
+</html>
